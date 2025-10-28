@@ -1,11 +1,11 @@
-/*
+/* 
     Theme Name: Main Theme
     Theme URI: http://example.com/main-theme
     Author: Fabio Dragone
     Author URI: http://example.com
     Description: Main theme for the website.
-    Version: 1.0.0
-*/
+    Version: 1.0.0 */
+
 
 /* Base Styles */
 * {
@@ -18,7 +18,7 @@ body {
   font-family: 'Lexend', sans-serif;
   line-height: 1.6;
   color: var(--wp--preset--color--text-on-light);
-  background-color: var(--wp--preset--color--text-on-dark);
+
 }
 
 /* Typography */

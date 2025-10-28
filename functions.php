@@ -20,6 +20,134 @@ if ( ! function_exists('theme_setup')) {
     add_action('after_setup_theme', 'theme_setup');
 }
 
+add_action('wp_enqueue_scripts', 'main_styles');
+
+function main_scripts() {
+    wp_enqueue_script( 
+        'album-list', // ID, NOME UNIVOCO, HANDLE
+        get_stylesheet_directory_uri() . '/blocks/album-list/album-list.js', 
+        array('jquery'), // Dipendenze
+        '1.8.1', // versione
+        true // true = nel footer, false = nell'header
+    );
+}
+add_action('wp_enqueue_scripts', 'main_scripts');
+
+/**
+ * Register ACF blocks
+ */
+if (!function_exists('registerAcfBlocks')) {
+	function registerAcfBlocks(): void {
+		// Check if ACF is active
+		if (!function_exists('acf_register_block_type')) {
+			return;
+		}
+
+		// Register Album List block
+		acf_register_block_type([
+			'name'              => 'album-list',
+			'title'             => __('Album List', 'main-theme'),
+			'description'       => __('List that contains all the songs of an album with Spotify links', 'main-theme'),
+			'render_template'   => get_template_directory() . '/blocks/album-list/album-list.php',
+			'render_callback'   => 'renderAlbumListBlock',
+			'category'          => 'widgets',
+			'icon'              => 'playlist-audio',
+			'keywords'          => ['Lista', 'Album', 'Canzoni', 'Songs', 'Spotify', 'Music'],
+			'supports'          => [
+				'anchor' => true,
+				'align'  => false,
+			],
+			'enqueue_style'     => get_template_directory_uri() . '/blocks/album-list/album-list.css',
+			'enqueue_script'    => get_template_directory_uri() . '/blocks/album-list/album-list.js',
+		]);
+	}
+	add_action('acf/init', 'registerAcfBlocks');
+}
+
+/**
+ * Render callback for Album List block
+ */
+if (!function_exists('renderAlbumListBlock')) {
+	function renderAlbumListBlock(array $block, string $content = '', bool $isPreview = false, int $postId = 0): void {
+		// Include the template file
+		$template = get_template_directory() . '/blocks/album-list/album-list.php';
+		if (file_exists($template)) {
+			include $template;
+		}
+	}
+}
+
+/**
+ * Add ACF field groups programmatically for Album List
+ */
+if (!function_exists('addAlbumListFields')) {
+	function addAlbumListFields(): void {
+		if (!function_exists('acf_add_local_field_group')) {
+			return;
+		}
+
+		acf_add_local_field_group([
+			'key' => 'group_album_list_block',
+			'title' => 'Album List Block Fields',
+			'fields' => [
+				[
+					'key' => 'field_album_songs',
+					'label' => 'Songs',
+					'name' => 'songs',
+					'type' => 'repeater',
+					'instructions' => 'Add songs to your album list. Each song can have a name and optional Spotify link.',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'sub_fields' => [
+						[
+							'key' => 'field_song_name',
+							'label' => 'Song Name',
+							'name' => 'song_name',
+							'type' => 'text',
+							'instructions' => 'Enter the title of the song',
+							'required' => 1,
+							'placeholder' => 'Enter song title...',
+							'maxlength' => 200,
+						],
+						[
+							'key' => 'field_spotify_link',
+							'label' => 'Spotify Link',
+							'name' => 'spotify_link',
+							'type' => 'url',
+							'instructions' => 'Enter the full Spotify URL for this song (optional)',
+							'required' => 0,
+							'placeholder' => 'https://open.spotify.com/track/...',
+						],
+					],
+					'min' => 0,
+					'max' => 50,
+					'layout' => 'table',
+					'button_label' => 'Add Song',
+					'collapsed' => 'field_song_name',
+				],
+			],
+			'location' => [
+				[
+					[
+						'param' => 'block',
+						'operator' => '==',
+						'value' => 'acf/album-list',
+					],
+				],
+			],
+			'menu_order' => 0,
+			'position' => 'normal',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => 'Fields for the Album List block',
+		]);
+	}
+	add_action('acf/init', 'addAlbumListFields');
+}
+
 if ( ! function_exists('main_styles')) {
     function main_styles() {
         wp_enqueue_style(

@@ -1,0 +1,167 @@
+/* Album List Block Styles */
+.album-list {
+	margin: 0;
+	padding: 0;
+}
+
+/* Placeholder styles for empty state */
+.album-list-placeholder {
+	margin: var(--wp--preset--spacing--regular) 0;
+}
+
+.album-list-placeholder p {
+	margin: 0;
+	padding: var(--wp--preset--spacing--large);
+	background-color: var(--wp--preset--color--light-background);
+	border: 2px dashed var(--wp--preset--color--secondary);
+	border-radius: 8px;
+	text-align: center;
+	color: var(--wp--preset--color--text-on-light);
+	font-style: italic;
+}
+
+.album-list__songs {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	counter-reset: song-counter;
+}
+
+.album-list__song-item {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: var(--wp--preset--spacing--regular);
+	padding: var(--wp--preset--spacing--small);
+	border-radius: 8px;
+	background-color: var(--wp--preset--color--light-background);
+	transition: background-color 0.3s ease;
+}
+
+.album-list__song-item:hover {
+	background-color: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--text-on-dark);
+}
+
+.album-list__song-content {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--small);
+	width: 100%;
+}
+
+.album-list__song-number {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 2rem;
+	height: 2rem;
+	background-color: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--text-on-dark);
+	border-radius: 50%;
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--small);
+	flex-shrink: 0;
+}
+
+.album-list__song-item:hover .album-list__song-number {
+	background-color: var(--wp--preset--color--text-on-dark);
+	color: var(--wp--preset--color--primary);
+}
+
+.album-list__song-name {
+	margin: 0;
+	flex: 1;
+	font-size: var(--wp--preset--font-size--regular);
+	font-weight: 400;
+	color: var(--wp--preset--color--text-on-light);
+}
+
+.album-list__song-item:hover .album-list__song-name {
+	color: var(--wp--preset--color--text-on-dark);
+}
+
+.album-list__spotify-link {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--xs);
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--small);
+	background-color: var(--wp--preset--color--secondary);
+	color: var(--wp--preset--color--text-on-dark);
+	text-decoration: none;
+	border-radius: 20px;
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 700;
+	transition: all 0.3s ease;
+	flex-shrink: 0;
+}
+
+.album-list__spotify-link:hover {
+	background-color: var(--wp--preset--color--dark-background);
+	color: var(--wp--preset--color--text-on-dark);
+	text-decoration: none;
+	transform: translateY(-2px);
+}
+
+.album-list__song-item:hover .album-list__spotify-link {
+	background-color: var(--wp--preset--color--text-on-dark);
+	color: var(--wp--preset--color--primary);
+}
+
+.album-list__spotify-icon {
+	display: inline-flex;
+	align-items: center;
+	width: 16px;
+	height: 16px;
+}
+
+.album-list__spotify-icon svg {
+	width: 100%;
+	height: 100%;
+}
+
+/* No-link state styles */
+.album-list__no-link {
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--small);
+	background-color: var(--wp--preset--color--dark-background);
+	color: var(--wp--preset--color--text-on-dark);
+	border-radius: 20px;
+	font-size: var(--wp--preset--font-size--small);
+	font-style: italic;
+	opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.album-list__song-content {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--wp--preset--spacing--xs);
+	}
+
+	.album-list__song-number {
+		align-self: flex-start;
+	}
+
+	.album-list__spotify-link {
+		align-self: flex-start;
+	}
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+	.album-list__song-item,
+	.album-list__spotify-link {
+		transition: none;
+	}
+
+	.album-list__spotify-link:hover {
+		transform: none;
+	}
+}
+
+/* Focus states for keyboard navigation */
+.album-list__spotify-link:focus {
+	outline: 2px solid var(--wp--preset--color--primary);
+	outline-offset: 2px;
+}

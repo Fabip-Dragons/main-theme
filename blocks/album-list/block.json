@@ -1,0 +1,34 @@
+{
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 2,
+    "name": "acf/album-list",
+    "title": "Album List",
+    "description": "List that contains all the songs of an album with Spotify links",
+    "style": [ 
+        "file:./album-list.css"
+    ],
+    "script": [
+        "file:./album-list.js"
+    ],
+    "category": "widgets",
+    "icon": "playlist-audio",
+    "keywords": [
+        "Lista", 
+        "Album",
+        "Canzoni",
+        "Songs",
+        "Spotify",
+        "Music"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderCallback": "renderAlbumListBlock"
+    },
+    "supports": {
+        "anchor": true,
+        "align": false,
+        "mode": false,
+        "jsx": true
+    },
+    "textdomain": "main-theme"
+}
