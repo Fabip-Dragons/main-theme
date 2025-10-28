@@ -60,6 +60,23 @@ if (!function_exists('registerAcfBlocks')) {
 			'enqueue_style'     => get_template_directory_uri() . '/blocks/album-list/album-list.css',
 			'enqueue_script'    => get_template_directory_uri() . '/blocks/album-list/album-list.js',
 		]);
+
+		// Register Album Content block
+		acf_register_block_type([
+			'name'              => 'album-content',
+			'title'             => __('Album Content', 'main-theme'),
+			'description'       => __('Block that displays the content of an album with Spotify links', 'main-theme'),
+			'render_template'   => get_template_directory() . '/blocks/album-content/album-content.php',
+			'category'          => 'widgets',
+			'icon'              => 'format-audio',
+			'keywords'          => ['Album', 'Music', 'Spotify', 'Apple Music', 'Cover'],
+			'supports'          => [
+				'anchor' => true,
+				'align'  => false,
+			],
+			'enqueue_style'     => get_template_directory_uri() . '/blocks/album-content/album-content.css',
+			'enqueue_script'    => get_template_directory_uri() . '/blocks/album-content/album-content.js',
+		]);
 	}
 	add_action('acf/init', 'registerAcfBlocks');
 }
@@ -146,6 +163,91 @@ if (!function_exists('addAlbumListFields')) {
 		]);
 	}
 	add_action('acf/init', 'addAlbumListFields');
+}
+
+/**
+ * Add ACF field groups programmatically for Album Content
+ */
+if (!function_exists('addAlbumContentFields')) {
+	function addAlbumContentFields(): void {
+		if (!function_exists('acf_add_local_field_group')) {
+			return;
+		}
+
+		acf_add_local_field_group([
+			'key' => 'group_album_content_block',
+			'title' => 'Album Content Block Fields',
+			'fields' => [
+				[
+					'key' => 'field_album_name',
+					'label' => 'Album Name',
+					'name' => 'album_name',
+					'type' => 'text',
+					'instructions' => 'Enter the name of the album (will be used as H1 title)',
+					'required' => 1,
+					'placeholder' => 'Album title...',
+					'maxlength' => 200,
+				],
+				[
+					'key' => 'field_artist_name',
+					'label' => 'Artist Name',
+					'name' => 'artist',
+					'type' => 'text',
+					'instructions' => 'Enter the name of the artist or band',
+					'required' => 1,
+					'placeholder' => 'Artist name...',
+					'maxlength' => 200,
+				],
+				[
+					'key' => 'field_explicit_content',
+					'label' => 'Explicit Content',
+					'name' => 'explicit',
+					'type' => 'true_false',
+					'instructions' => 'Check if this album contains explicit content',
+					'required' => 0,
+					'message' => 'This album contains explicit content',
+					'default_value' => 0,
+					'ui' => 1,
+				],
+				[
+					'key' => 'field_spotify_link',
+					'label' => 'Spotify Link',
+					'name' => 'spotify_link',
+					'type' => 'text',
+					'instructions' => 'Enter the Spotify URL for this album',
+					'required' => 0,
+					'placeholder' => 'https://open.spotify.com/album/...',
+				],
+				[
+					'key' => 'field_apple_music_link',
+					'label' => 'Apple Music Link',
+					'name' => 'apple_music_link',
+					'type' => 'text',
+					'instructions' => 'Enter the Apple Music URL for this album',
+					'required' => 0,
+					'placeholder' => 'https://music.apple.com/album/...',
+				],
+			],
+			'location' => [
+				[
+					[
+						'param' => 'block',
+						'operator' => '==',
+						'value' => 'acf/album-content',
+					],
+				],
+			],
+			'menu_order' => 0,
+			'position' => 'normal',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => 'Fields for the Album Content block',
+		]);
+	}
+	add_action('acf/init', 'addAlbumContentFields');
 }
 
 if ( ! function_exists('main_styles')) {

@@ -1,0 +1,31 @@
+{
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 2,
+    "name": "acf/album-content",
+    "title": "Album Content",
+    "description": "Block that displays the content of an album with Spotify links",
+    "style": [ 
+        "file:./album-content.css"
+    ],
+    "script": [
+        "file:./album-content.js"
+    ],
+    "category": "widgets",
+    "icon": "playlist-audio",
+    "keywords": [
+        "Lista", 
+        "Album",
+        "Canzoni",
+        "Songs",
+        "Spotify",
+        "Music"
+    ],
+    "acf": {
+        "mode": "edit"
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "textdomain": "main-theme"
+}

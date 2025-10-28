@@ -1,0 +1,246 @@
+/* Album Content Block Styles */
+.album-content {
+	margin: 0;
+	padding: var(--wp--preset--spacing--large);
+	background-color: var(--wp--preset--color--light-background);
+	border-radius: 16px;
+}
+
+/* Header Section */
+.album-content__header {
+	display: flex;
+	gap: var(--wp--preset--spacing--large);
+	margin-bottom: var(--wp--preset--spacing--large);
+}
+
+/* Album Cover */
+.album-content__cover {
+	flex-shrink: 0;
+	width: 300px;
+	height: 300px;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.album-content__cover-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.album-content__cover-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	background-color: var(--wp--preset--color--dark-background);
+	color: var(--wp--preset--color--text-on-dark);
+	text-align: center;
+}
+
+.album-content__cover-icon {
+	font-size: 4rem;
+	margin-bottom: var(--wp--preset--spacing--small);
+}
+
+.album-content__cover-placeholder p {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--small);
+	opacity: 0.7;
+}
+
+/* Album Info */
+.album-content__info {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 300px;
+}
+
+.album-content__title {
+	margin: 0 0 var(--wp--preset--spacing--regular) 0;
+	font-size: var(--wp--preset--font-size--larger);
+	font-weight: 900;
+	color: var(--wp--preset--color--text-on-light);
+	line-height: 1.2;
+}
+
+.album-content__meta {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--regular);
+	flex-wrap: wrap;
+}
+
+.album-content__artist {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--large);
+	font-weight: 700;
+	color: var(--wp--preset--color--primary);
+}
+
+.album-content__explicit {
+	display: inline-flex;
+	align-items: center;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--small);
+	background-color: var(--wp--preset--color--secondary);
+	color: var(--wp--preset--color--text-on-dark);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 700;
+	text-transform: uppercase;
+	border-radius: 4px;
+	letter-spacing: 0.05em;
+}
+
+/* Actions Section */
+.album-content__actions {
+	display: flex;
+	gap: var(--wp--preset--spacing--regular);
+	flex-wrap: wrap;
+}
+
+.album-content__button {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--small);
+	padding: var(--wp--preset--spacing--regular) var(--wp--preset--spacing--large);
+	background-color: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--text-on-dark);
+	text-decoration: none;
+	border-radius: 32px;
+	font-size: var(--wp--preset--font-size--regular);
+	font-weight: 700;
+	transition: all 0.3s ease;
+	border: 2px solid transparent;
+	min-height: 48px;
+}
+
+.album-content__button:hover {
+	background-color: var(--wp--preset--color--secondary);
+	color: var(--wp--preset--color--text-on-dark);
+	text-decoration: none;
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.album-content__button:focus {
+	outline: none;
+	border-color: var(--wp--preset--color--primary);
+	box-shadow: 0 0 0 3px rgba(146, 46, 220, 0.3);
+}
+
+.album-content__button--spotify {
+	background-color: #1db954;
+}
+
+.album-content__button--spotify:hover {
+	background-color: #1ed760;
+}
+
+.album-content__button--apple {
+	background-color: #fa243c;
+}
+
+.album-content__button--apple:hover {
+	background-color: #ff2d55;
+}
+
+.album-content__button-icon {
+	display: inline-flex;
+	align-items: center;
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+}
+
+.album-content__button-icon svg {
+	width: 100%;
+	height: 100%;
+}
+
+.album-content__button-text {
+	white-space: nowrap;
+}
+
+.album-content__no-links {
+	margin: 0;
+	padding: var(--wp--preset--spacing--regular);
+	color: var(--wp--preset--color--text-on-light);
+	font-style: italic;
+	opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.album-content {
+		padding: var(--wp--preset--spacing--regular);
+	}
+
+	.album-content__header {
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--regular);
+	}
+
+	.album-content__cover {
+		width: 100%;
+		max-width: 250px;
+		height: 250px;
+		align-self: center;
+	}
+
+	.album-content__info {
+		min-height: auto;
+		text-align: center;
+	}
+
+	.album-content__title {
+		font-size: var(--wp--preset--font-size--large);
+	}
+
+	.album-content__meta {
+		justify-content: center;
+	}
+
+	.album-content__actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.album-content__button {
+		justify-content: center;
+	}
+}
+
+@media (max-width: 480px) {
+	.album-content__cover {
+		width: 200px;
+		height: 200px;
+	}
+
+	.album-content__button {
+		padding: var(--wp--preset--spacing--small) var(--wp--preset--spacing--regular);
+	}
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+	.album-content__button {
+		transition: none;
+	}
+
+	.album-content__button:hover {
+		transform: none;
+	}
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.album-content__button {
+		border: 2px solid currentColor;
+	}
+}
